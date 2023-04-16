@@ -1,4 +1,5 @@
 CHOICES = ['rock', 'paper', 'scissors'];
+const NUMBER_OF_GAMES = 5;
 
 let getComputerChoice = function () {
   return CHOICES[Math.floor(Math.random() * CHOICES.length)];
@@ -6,6 +7,7 @@ let getComputerChoice = function () {
 
 let playRound = function (compChoice, playerChoice) {
   console.log(playerChoice);
+  console.log(compChoice);
   if (typeof playerChoice == 'string')
     playerChoice = playerChoice.toLowerCase();
   else {
@@ -22,7 +24,9 @@ let playRound = function (compChoice, playerChoice) {
     return ['bad', 'Try Again'];
   }
 
-  if (playerChoice == 'rock') {
+  if (playerChoice == compChoice) {
+    return ['draw', "It's a draw, you both chose " + playerChoice];
+  } else if (playerChoice == 'rock') {
     if (compChoice == 'scissors')
       return ['player', 'You win, ' + playerChoice + ' beats ' + compChoice];
     else if (compChoice == 'paper')
@@ -37,19 +41,17 @@ let playRound = function (compChoice, playerChoice) {
       return ['player', 'You win, ' + playerChoice + ' beats ' + compChoice];
     else if (compChoice == 'rock')
       return ['computer', 'You lose ' + compChoice + ' beats ' + playerChoice];
-  } else if (playerChoice == compChoice)
-    return ['draw', "It's a draw, you both chose " + playerChoice];
-  else return ['bad', 'You really goofed something up...'];
+  } else return ['bad', 'You really goofed something up...'];
 };
 
 let scorePlayer = 0;
 let scoreComputer = 0;
 for (let i = 0; i < 5; ++i) {
-  let result = playRound(
-    getComputerChoice(),
-    prompt('Choose your weapon:\nRock, Paper, or Scissors')
+  let playerChoiceInput = prompt(
+    'Choose your weapon:\nRock, Paper, or Scissors'
   );
-  console.log(result);
+  let result = playRound(getComputerChoice(), playerChoiceInput);
+  console.log(result[0]);
 
   if (result[0] == 'player') scorePlayer++;
   else if (result[0] == 'computer') scoreComputer++;
@@ -57,4 +59,12 @@ for (let i = 0; i < 5; ++i) {
   console.log(
     `${result[1]}\nThe Score is now:\nYou: ${scorePlayer}\nComputer: ${scoreComputer}`
   );
+  if (scorePlayer > NUMBER_OF_GAMES / 2) {
+    console.log('You won somehow!');
+    break;
+  }
+  if (scoreComputer > NUMBER_OF_GAMES / 2) {
+    console.log('You lost, as expected...');
+    break;
+  }
 }
