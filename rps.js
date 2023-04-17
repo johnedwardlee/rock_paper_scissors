@@ -6,13 +6,11 @@ let getComputerChoice = function () {
 };
 
 let playRound = function (compChoice, playerChoice) {
-  console.log(playerChoice);
-  console.log(compChoice);
   if (typeof playerChoice == 'string')
     playerChoice = playerChoice.toLowerCase();
   else {
     alert(
-      'You have to input something to play the game.\nRefresh to try agian at being competent...'
+      'You have to input something to play the game.\nTry to be competent next time...'
     );
     return ['bad', 'Try Again'];
   }
@@ -46,25 +44,25 @@ let playRound = function (compChoice, playerChoice) {
 
 let scorePlayer = 0;
 let scoreComputer = 0;
-for (let i = 0; i < 5; ++i) {
+for (let i = 0; i < NUMBER_OF_GAMES; i++) {
   let playerChoiceInput = prompt(
     'Choose your weapon:\nRock, Paper, or Scissors'
   );
   let result = playRound(getComputerChoice(), playerChoiceInput);
-  console.log(result[0]);
 
   if (result[0] == 'player') scorePlayer++;
   else if (result[0] == 'computer') scoreComputer++;
+  else if (result[0] == 'bad') i--;
 
   console.log(
     `${result[1]}\nThe Score is now:\nYou: ${scorePlayer}\nComputer: ${scoreComputer}`
   );
-  if (scorePlayer > NUMBER_OF_GAMES / 2) {
-    console.log('You won somehow!');
-    break;
-  }
-  if (scoreComputer > NUMBER_OF_GAMES / 2) {
-    console.log('You lost, as expected...');
-    break;
-  }
+}
+
+if (scoreComputer > scorePlayer) {
+  console.log('You lost, as expected...');
+} else if (scorePlayer > scoreComputer) {
+  console.log('You won somehow!');
+} else {
+  console.log('No winner, which means you still lost...');
 }
