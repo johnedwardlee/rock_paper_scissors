@@ -4,29 +4,40 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Roboto:wght@300;400;500;700;900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
     <title>Rock, Paper, Scissors</title>
   </head>
 
   <body>
-    <button class="choice">Rock</button>
-    <button class="choice">Paper</button>
-    <button class="choice">Scissors</button>
+    <div id="btn-container">
+      <button class="rock choice">
+        <img src="/images/rock.jpg" alt="rock" />
+      </button>
+      <button class="paper choice">
+        <img src="/images/paper.jpg" alt="paper" />
+      </button>
+      <button class="scissors choice">
+        <img src="/images/scissors.jpg" alt="scissors" />
+      </button>
+    </div>
     <div class="scoreboard">
       <h2>Scoreboard</h2>
       <ul>
         <li>
-          Game Count:
           <div class="game-count"></div>
         </li>
         <li>
-          Player:
           <div class="player-score"></div>
         </li>
         <li>
-          Computer:
           <div class="comp-score"></div>
         </li>
       </ul>
+      <button class="reset-btn">Reset Game</button>
     </div>
     <script src="rps.js"></script>
   </body>
