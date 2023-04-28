@@ -46,6 +46,7 @@ function playRound(e) {
   const compChoice = getComputerChoice();
 
   gameCounter++;
+  if (gameCounter > NUMBER_OF_GAMES) return;
   if (playerChoice == compChoice) {
     roundResult('draw', "It's a draw, you both chose " + playerChoice);
   } else if (playerChoice == 'rock') {
