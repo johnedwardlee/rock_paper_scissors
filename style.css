@@ -1,12 +1,13 @@
-body{
+body {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   background-image: url(images/wood.jpg);
+  overflow: hidden;
 }
 
-#btn-container{
+#btn-container {
   display: flex;
   justify-content: space-evenly;
   gap: 50px;
@@ -14,27 +15,28 @@ body{
   margin-top: 10px;
 }
 
-img{
+img {
   height: 250px;
   width: 350px;
 }
 
-.choice{
+.choice {
   all: unset;
   border: 5px;
   border-color: black;
   border-style: solid;
   max-height: 250px;
-  transition: all .1s ease; 
+  max-width: 350px;
+  transition: all 0.1s ease;
 }
 
-.clicked{
+.clicked {
   transform: scale(1.1);
   box-shadow: 0 0 1rem #024b02;
   border-color: #024b02;
 }
 
-.scoreboard{
+#scoreboard {
   font-family: 'Roboto', sans-serif;
   font-size: large;
   display: flex;
@@ -46,11 +48,11 @@ img{
   transform: scale(1.1);
 }
 
-.scoreboard > h2{
+#scoreboard > h2 {
   text-decoration: underline;
 }
 
-.reset-btn{
+.reset-btn {
   margin-top: 20px;
   font-size: medium;
   background-color: #88abd4a4;
@@ -59,11 +61,11 @@ img{
   border-radius: 5px;
 }
 
-.reset-btn:hover{
+.reset-btn:hover {
   background-color: #88abd4e5;
 }
 
-.reset-btn:active{
+.reset-btn:active {
   background-color: #88abd4e5;
   transform: translateY(2px);
 }
@@ -73,20 +75,37 @@ ul {
   list-style-type: none;
 }
 
-.game-over{
-  transform:translateY(100%);
+#message {
+  font-family: 'Roboto', sans-serif;
+  font-size: large;
+  display: flex;
+  /* flex-direction: column; */
+  background-color: rgba(128, 128, 128, 0.747);
+  margin-top: 30px;
+  padding: 1px 32px 10px;
+  border-radius: 10px;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+
+.game-over {
   animation: scroll-down 10s linear infinite;
+  background-color: rgba(255, 0, 0, 0.788);
+  font-size: x-large;
+  font-weight: bold;
+  color: white;
+  border-style: solid;
+  border-color: rgba(0, 0, 0, 0.822);
+  border-radius: 5px;
+  padding: 5px;
 }
 
 @keyframes scroll-down {
-  0% { 
-  -moz-transform: translateY(-100%); /* Browser bug fix */
-  -webkit-transform: translateY(-100%); /* Browser bug fix */
-  transform: translateY(-100%); 
+  from {
+    transform: translateY(-100vh);
   }
-  100% { 
-  -moz-transform: translateY(100%); /* Browser bug fix */
-  -webkit-transform: translateY(100%); /* Browser bug fix */
-  transform: translateY(100%); 
+  to {
+    transform: translateY(100vh);
   }
 }

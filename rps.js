@@ -24,6 +24,19 @@ function roundResult(result, msg) {
     compScoreDisp.textContent = `Computer: ${scoreComp}`;
   }
   gameCount.textContent = `Game Count: ${gameCounter}`;
+  message.textContent = `  ${msg}`;
+}
+
+function resetGame(e) {
+  gameCounter = 0;
+  scorePlayer = 0;
+  scoreComp = 0;
+  playerScoreDisp.textContent = `Player: ${scorePlayer}`;
+  compScoreDisp.textContent = `Computer: ${scoreComp}`;
+  gameCount.textContent = `Game Count: ${gameCounter}`;
+
+  const removeGameOver = document.getElementsByClassName('game-over');
+  removeGameOver[0].remove();
 }
 
 function playRound(e) {
@@ -76,13 +89,14 @@ function playRound(e) {
     let gameOverMsg;
     if (scorePlayer > scoreComp)
       gameOverMsg = "You won, maybe you aren't as incompetent as I thought...";
-    else
+    else if (scoreComp > scorePlayer)
       gameOverMsg =
         'I figured you would lose. Did you actually think you had a chance?';
+    else gameOverMsg = 'Draws are not wins, so you are still a loser';
     const gameOverTextNode = document.createTextNode(gameOverMsg);
     gameOver.appendChild(gameOverTextNode);
-    const topOfPage = document.getElementById('btn-container');
-    document.body.insertBefore(gameOver, topOfPage);
+    const bottomOfPage = document.getElementById('message');
+    document.body.insertBefore(gameOver, bottomOfPage.nextSibling);
   }
 }
 
@@ -92,9 +106,12 @@ choiceButtons.forEach((choice) => choice.addEventListener('click', playRound));
 choiceButtons.forEach((choice) =>
   choice.addEventListener('transitionend', removeTransition)
 );
+const message = document.querySelector('.wl-msg');
 const gameCount = document.querySelector('.game-count');
 const playerScoreDisp = document.querySelector('.player-score');
 const compScoreDisp = document.querySelector('.comp-score');
 playerScoreDisp.textContent = `Player: ${scorePlayer}`;
 compScoreDisp.textContent = `Computer: ${scoreComp}`;
 gameCount.textContent = `Game Count: ${gameCounter}`;
+const resetButton = document.querySelector('.reset-btn');
+resetButton.addEventListener('click', resetGame);
